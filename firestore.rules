@@ -5,6 +5,11 @@ service cloud.firestore {
             allow read, write: if false;
         }
 
+        match /users/{docId} {
+            allow read;
+            allow write: if request.auth.uid == 'admin';
+        }
+
         match /posts/{docId} {
             allow read, write;
         }
